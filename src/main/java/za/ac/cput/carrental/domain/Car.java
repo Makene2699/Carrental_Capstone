@@ -26,15 +26,14 @@ public class Car {
     protected Car() {
     }
 
-    private Car(String carId, String make, String model, int year,
-                double dailyRate, String status, int mileage){
-        this.carId = carId;
-        this.make = make;
-        this.model = model;
-        this.year = year;
-        this.dailyRate = dailyRate;
-        this.status = status;
-        this.mileage = mileage;
+    private Car(Builder builder) {
+        this.carId = builder.carId;
+        this.make = builder.make;
+        this.model = builder.model;
+        this.year = builder.year;
+        this.dailyRate = builder.dailyRate;
+        this.status = builder.status;
+        this.mileage = builder.mileage;
     }
 
     // ---------- Getters ----------
@@ -124,8 +123,19 @@ public class Car {
             return this;
         }
 
+        public Builder copy(Car c) {
+            this.carId = c.carId;
+            this.make = c.make;
+            this.model = c.model;
+            this.year = c.year;
+            this.dailyRate = c.dailyRate;
+            this.status = c.status;
+            this.mileage = c.mileage;
+            return this;
+        }
+
         public Car build() {
-            return new Car(carId, make, model, year, dailyRate, status, mileage);
+            return new Car(this);
         }
     }
 }
