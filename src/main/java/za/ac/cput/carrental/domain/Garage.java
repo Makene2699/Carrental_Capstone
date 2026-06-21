@@ -1,7 +1,7 @@
 /*
  * Garage.java
  * Garage POJO class
- * Author: SE Machaule (222359366)
+ * Author: SE MACHAULE (222359366)
  * Date: 21 June 2026
  */
 
