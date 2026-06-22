@@ -1,5 +1,9 @@
 package za.ac.cput.carrental.domain;
 
+//Stephanie Tola Oluwafemi Lewu
+// Student Number: 230211216
+// 21 June 2026
+
 public class Member {
 
     private String memberId;
@@ -41,6 +45,17 @@ public class Member {
         return accountStatus;
     }
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "memberId='" + memberId + '\'' +
+                ", name='" + name + '\'' +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", accountStatus='" + accountStatus + '\'' +
+                '}';
+    }
+
     public static class Builder{
         private String memberId;
         private String name;
@@ -78,8 +93,7 @@ public class Member {
             return this;
         }
 
-        public Member build() {
-            return new Member(this);
+        public Member build() {return new Member(this);
         }
     }
 }
