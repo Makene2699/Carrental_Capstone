@@ -9,7 +9,7 @@ public class Member {
     private String memberId;
     private String name;
     private String licenseNumber;
-    private int phoneNumber;
+    private String phoneNumber;
     private String accountStatus;
 
     protected Member(){
@@ -37,7 +37,7 @@ public class Member {
         return licenseNumber;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -60,7 +60,7 @@ public class Member {
         private String memberId;
         private String name;
         private String licenseNumber;
-        private int phoneNumber;
+        private String phoneNumber;
         private String accountStatus;
 
         public Builder setMemberId(String memberId){
@@ -75,7 +75,7 @@ public class Member {
             this.licenseNumber = licenseNumber;
             return this;
         }
-        public Builder setPhoneNumber(int phoneNumber){
+        public Builder setPhoneNumber(String phoneNumber){
             this.phoneNumber = phoneNumber;
             return this;
         }
