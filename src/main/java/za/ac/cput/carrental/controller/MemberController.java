@@ -1,3 +1,9 @@
+/*MemberController.java
+Author: Stephanie Tola Oluwafemi Lewu
+Student Number: 230211216
+29 July 2026
+ */
+
 package za.ac.cput.carrental.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
