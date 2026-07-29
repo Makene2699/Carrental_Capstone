@@ -6,48 +6,23 @@
 package za.ac.cput.carrental.factory;
 
 import za.ac.cput.carrental.domain.Insurance;
+import za.ac.cput.carrental.util.Helper;
+
 
 public class InsuranceFactory {
 
-
-    public static Insurance createInsurance(String insuranceId,
-                                            String bookingId,
-                                            String type,
-                                            double dailyPremium) {
+public static Insurance createInsurance(String insuranceId, String bookingId,
+                                            String type, double dailyPremium) {
+        if (Helper.isNullOrEmpty(insuranceId) || Helper.isNullOrEmpty(bookingId)
+                || Helper.isNullOrEmpty(type)
+                || !Helper.isPositiveDouble(dailyPremium)) {
+            return null;
+        }
         return new Insurance.Builder()
                 .setInsuranceId(insuranceId)
                 .setBookingId(bookingId)
                 .setType(type)
                 .setDailyPremium(dailyPremium)
-                .build();
-    }
-
-
-    public static Insurance createComprehensive(String insuranceId,
-                                                String bookingId) {
-        return new Insurance.Builder()
-                .setInsuranceId(insuranceId)
-                .setBookingId(bookingId)
-                .setType("Comprehensive")
-                .setDailyPremium(120.00)
-                .build();
-    }
-
-
-    public static Insurance createThirdParty(String insuranceId,
-                                             String bookingId) {
-        return new Insurance.Builder()
-                .setInsuranceId(insuranceId)
-                .setBookingId(bookingId)
-                .setType("Third Party")
-                .setDailyPremium(55.00)
-                .build();
-    }
-
-
-    public static Insurance createCopy(Insurance existing) {
-        return new Insurance.Builder()
-                .copy(existing)
                 .build();
     }
 }

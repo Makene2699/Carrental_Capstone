@@ -13,53 +13,57 @@ import static org.junit.jupiter.api.Assertions.*;
 public class InsuranceFactoryTest {
 
     @Test
-    void testCreateInsurance_Success() {
-        Insurance ins = InsuranceFactory.createInsurance(
-                "INS001", "BK001", "Basic", 75.00);
-        assertNotNull(ins);
-        assertEquals("INS001", ins.getInsuranceId());
-        assertEquals("BK001", ins.getBookingId());
-        assertEquals("Basic", ins.getType());
-        assertEquals(75.00, ins.getDailyPremium());
-        System.out.println("Created: " + ins);
+    void createInsurance_validData_success() {
+        Insurance insurance = InsuranceFactory.createInsurance(
+                "INS001", "BOOK001", "Comprehensive", 150.00);
+
+        assertNotNull(insurance);
+        assertEquals("INS001", insurance.getInsuranceId());
+        assertEquals("BOOK001", insurance.getBookingId());
+        assertEquals("Comprehensive", insurance.getType());
+        assertEquals(150.00, insurance.getDailyPremium());
     }
 
     @Test
-    void testCreateComprehensive_Success() {
-        Insurance ins = InsuranceFactory.createComprehensive("INS002", "BK002");
-        assertNotNull(ins);
-        assertEquals("Comprehensive", ins.getType());
-        assertEquals(120.00, ins.getDailyPremium());
-        System.out.println("Comprehensive: " + ins);
+    void createInsurance_nullInsuranceId_returnsNull() {
+        Insurance insurance = InsuranceFactory.createInsurance(
+                null, "BOOK001", "Comprehensive", 150.00);
+        assertNull(insurance);
     }
 
     @Test
-    void testCreateThirdParty_Success() {
-        Insurance ins = InsuranceFactory.createThirdParty("INS003", "BK003");
-        assertNotNull(ins);
-        assertEquals("Third Party", ins.getType());
-        assertEquals(55.00, ins.getDailyPremium());
-        System.out.println("Third Party: " + ins);
+    void createInsurance_emptyBookingId_returnsNull() {
+        Insurance insurance = InsuranceFactory.createInsurance(
+                "INS001", "", "Comprehensive", 150.00);
+        assertNull(insurance);
     }
 
     @Test
-    void testCreateCopy_Success() {
-        Insurance original = InsuranceFactory.createInsurance(
-                "INS004", "BK004", "Comprehensive", 120.00);
-        Insurance copy = InsuranceFactory.createCopy(original);
-        assertNotNull(copy);
-        assertEquals(original.getInsuranceId(), copy.getInsuranceId());
-        assertEquals(original.getType(), copy.getType());
-        assertEquals(original.getDailyPremium(), copy.getDailyPremium());
-        System.out.println("Copy: " + copy);
+    void createInsurance_emptyType_returnsNull() {
+        Insurance insurance = InsuranceFactory.createInsurance(
+                "INS001", "BOOK001", "", 150.00);
+        assertNull(insurance);
     }
 
     @Test
-    void testCalculatePremiumTotal_Success() {
-        Insurance ins = InsuranceFactory.createInsurance(
-                "INS005", "BK005", "Basic", 80.00);
-        double total = ins.calculatePremiumTotal(5);
-        assertEquals(400.00, total);
-        System.out.println("Premium total: " + total);
+    void createInsurance_negativeDailyPremium_returnsNull() {
+        Insurance insurance = InsuranceFactory.createInsurance(
+                "INS001", "BOOK001", "Comprehensive", -50.00);
+        assertNull(insurance);
+    }
+
+    @Test
+    void createInsurance_zeroDailyPremium_returnsNull() {
+        Insurance insurance = InsuranceFactory.createInsurance(
+                "INS001", "BOOK001", "Comprehensive", 0.00);
+        assertNull(insurance);
+    }
+
+    @Test
+    void createInsurance_nullType_returnsNull() {
+        Insurance insurance = InsuranceFactory.createInsurance(
+                "INS001", "BOOK001", null, 150.00);
+        assertNull(insurance);
+
     }
 }
