@@ -28,19 +28,6 @@ public class BookingFactoryTests {
     }
 
     @Test
-    void testCreateBooking_NotNull() {
-        Booking booking = BookingFactory.createBooking(
-                "BOOK002",
-                "M002",
-                "C002",
-                "2026-10-01",
-                "2026-10-05",
-                1300.00
-        );
-        assertNotNull(booking);
-    }
-
-    @Test
     void testCalculateRentalDuration() {
         Booking booking = BookingFactory.createBooking(
                 "BOOK003",
@@ -70,13 +57,8 @@ public class BookingFactoryTests {
     // ===== Helper class tests =====
 
     @Test
-    void testStartDateIsValid() {
+    void testValidDate() {
         assertTrue(Helper.isValidDate("2026-09-01"));
-    }
-
-    @Test
-    void testEndDateIsValid() {
-        assertTrue(Helper.isValidDate("2026-09-05"));
     }
 
     @Test
@@ -101,22 +83,60 @@ public class BookingFactoryTests {
 
     @Test
     void testTotalCostZeroFails() {
+
         assertFalse(Helper.isPositiveDouble(0.0));
     }
 
     @Test
-    void testMemberIdNotEmpty() {
+    void testFieldNotEmpty() {
+
         assertFalse(Helper.isNullOrEmpty("M001"));
     }
 
     @Test
-    void testCarIdNotEmpty() {
-        assertFalse(Helper.isNullOrEmpty("C001"));
+    void testNullStringFails() {
+
+        assertTrue(Helper.isNullOrEmpty(null));
+    }
+
+    // ===== Null return tests =====
+
+    @Test
+    void testCreateBooking_InvalidDate_ReturnsNull() {
+        Booking booking = BookingFactory.createBooking(
+                "BOOK005",
+                "M001",
+                "C001",
+                "invalid-date",
+                "2026-09-05",
+                1800.00
+        );
+        assertNull(booking);
     }
 
     @Test
-    void testNullStringFails() {
-        assertTrue(Helper.isNullOrEmpty(null));
+    void testCreateBooking_NegativeCost_ReturnsNull() {
+        Booking booking = BookingFactory.createBooking(
+                "BOOK006",
+                "M001",
+                "C001",
+                "2026-09-01",
+                "2026-09-05",
+                -100.00
+        );
+        assertNull(booking);
+    }
+
+    @Test
+    void testCreateBooking_EmptyMemberId_ReturnsNull() {
+        Booking booking = BookingFactory.createBooking(
+                "BOOK007",
+                "",
+                "C001",
+                "2026-09-01",
+                "2026-09-05",
+                1800.00
+        );
+        assertNull(booking);
     }
 }
-
